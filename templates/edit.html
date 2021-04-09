@@ -1,0 +1,15 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Edit Name</h1>
+<hr>
+<form action="{% url 'editname' questboard_id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name">
+    <input type="submit">
+</form>
+
+{% endblock %}
+

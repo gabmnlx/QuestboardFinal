@@ -22,6 +22,7 @@ class questboard(TemplateView):
         context['questboard'] = Questboard.objects.get(
             id=pk).questcard_set.all()
         context['qbid'] = pk
+        context['qb'] = Questboard.objects.get(id=pk)
         return context
 
 
@@ -65,3 +66,32 @@ def addQC(request, questboard_id):
     form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(id=questboard_id)
     context['form'] = form
     return render(request, 'addQC.html', context)
+
+def editName(request, questboard_id):
+
+    if request.method == 'POST':
+        questboard = Questboard.objects.get(id=questboard_id)
+        questboard.name = request.POST['name']
+        questboard.save()
+        return redirect('/questboard/' + str(questboard_id))
+    return render(request, 'edit.html', {'questboard_id':questboard_id}) 
+
+
+def editDescription(request, questboard_id):
+
+    if request.method == 'POST':
+        questboard = Questboard.objects.get(id=questboard_id)
+        questboard.description = request.POST['name']
+        questboard.save()
+        return redirect('/questboard/' + str(questboard_id))
+    return render(request, 'editDescription.html', {'questboard_id':questboard_id}) 
+
+def editStars(request, questboard_id):
+
+    if request.method == 'POST':
+        questboard = Questboard.objects.get(id=questboard_id)
+        questboard.stars = int(request.POST['number'])
+        questboard.save()
+        return redirect('/questboard/' + str(questboard_id))
+    return render(request, 'editStars.html', {'questboard_id':questboard_id}) 
+

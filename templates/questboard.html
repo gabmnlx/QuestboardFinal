@@ -2,7 +2,10 @@
 {% load static %}
 
 {% block content %}
-<h1>Questcards</h1>
+<h1>{{qb.name}} Questboard <form action="/editName/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h1>
+<h3>{{qb.description}} <form action="/editDescription/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
+<h3>Stars: {{qb.stars}} <form action="/editStars/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
+<hr>
 
 <div class="container">
     <div class="row">

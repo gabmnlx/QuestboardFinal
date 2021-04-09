@@ -1,0 +1,14 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Change number of stars</h1>
+<hr>
+<form action="{% url 'editStars' questboard_id %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="number">
+    <input type="submit">
+</form>
+
+{% endblock %}
+

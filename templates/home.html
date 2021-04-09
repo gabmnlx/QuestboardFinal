@@ -10,7 +10,7 @@
         {% for questboard in questboards %}
         <div class="col-md-3">
             <div class="card card body">
-                <a class="btn btn-primary  btn-sm btn-block" href=""> <strong>{{questboard.name}}</strong></a>
+                <a class="btn btn-primary  btn-sm btn-block" href=""> <strong>{{questboard.name}} <form action="/editName/{{questboard.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></strong></a>
     
                 <table class="table">
 
@@ -19,7 +19,7 @@
                     </td>
 
                     <tr><td>stars: {{questboard.stars}} 
-                        <form action="" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form>
+                        <form action="/editStars/{{questboard.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-warning" value="edit" ></form>
                     </td></tr>
                 </table>
             </div>
