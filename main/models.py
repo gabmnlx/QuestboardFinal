@@ -8,6 +8,9 @@ class Questboard(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def stars_int(self):
+        return "\u2B50"*self.stars
 
 
 class Questcard(models.Model):
@@ -25,3 +28,6 @@ class Questcard(models.Model):
 
     def __str__(self):
         return self.name
+
+    def stars_int(self):
+        return "\u2B50"*self.stars
