@@ -1,0 +1,37 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<h1><strong>Questboards</strong></h1>
+
+
+<div class="container">
+    <div class="row">
+        {% for questboard in questboards %}
+        <div class="col-md-3">
+            <div class="card card body">
+                <a class="btn btn-primary  btn-sm btn-block" href=""> <strong>{{questboard.name}}</strong></a>
+    
+                <table class="table">
+
+                    <td><strong>Description:</strong> {{questboard.description}}
+                        <form action="/editDescription/{{questboard.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-warning" value="edit" ></form>
+                    </td>
+
+                    <tr><td>stars: {{questboard.stars}} 
+                        <form action="" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form>
+                    </td></tr>
+                </table>
+            </div>
+            <form action="/questboard/{{questboard.id}}">
+                <input class="btn btn-outline-primary" type="submit" value="enter">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>   
+<form action="/addQB">
+    <input type="submit" value="Add Questboard">
+</form>
+{% endblock %}
+

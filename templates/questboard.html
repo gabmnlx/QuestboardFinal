@@ -1,0 +1,46 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Questcards</h1>
+
+<div class="container">
+    <div class="row">
+        {% for questcard in questboard %}
+        <div class="col-md-3">
+            <div class="card card body">
+                <a class="btn btn-primary  btn-sm btn-block" href=""> <strong>{{questcard.name}}</strong></a> 
+
+                    <table class="table" >
+                        <td> <strong>Description:</strong> {{questcard.description}}</td>
+                        <tr><td>slot 1: <strong>{{questcard.person1}}</strong></td> </tr>
+                        <tr><td>slot 2: <strong> {{questcard.person2}} </strong></td></tr>
+                        <tr><td>slot 3: <strong> {{questcard.person3}} </strong></td></tr>
+                        <tr><td>stars: {{questcard.stars}}</td></tr>
+                        
+                        <tr><td>
+                            
+                            {% if questcard.person3 is not None %}
+                                <strong>no slots available</strong> 
+                            {% else %}
+                                <form action="/addPerson/{{questcard.id}}/{{questcard.questboard.id}}">
+                                    <input type="text" name="person">
+                                    <input class="btn btn-outline-primary" type="submit" value="sign-up">
+                                </form>
+                            {% endif %}
+                        </td></tr>
+                    </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form action="/addQC/{{qbid}}">
+        <input type="submit" value="Add Questcard">
+    </form>
+
+</div>
+{% endblock %}
+
+
+
