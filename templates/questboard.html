@@ -4,7 +4,7 @@
 {% block content %}
 <h1>{{qb.name}} Questboard <form action="/editName/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h1>
 <h3>{{qb.description}} <form action="/editDescription/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
-<h3>Stars: {{qb.stars}} <form action="/editStars/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
+<h3>Stars: {{qb.stars_int}} <form action="/editStars/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
 <hr>
 
 <div class="container">
@@ -19,7 +19,7 @@
                         <tr><td>slot 1: <strong>{{questcard.person1}}</strong></td> </tr>
                         <tr><td>slot 2: <strong> {{questcard.person2}} </strong></td></tr>
                         <tr><td>slot 3: <strong> {{questcard.person3}} </strong></td></tr>
-                        <tr><td>stars: {{questcard.stars}}</td></tr>
+                        <tr><td>stars: {{questcard.stars_int}} </td></tr>
                         
                         <tr><td>
                             
@@ -27,7 +27,6 @@
                                 <strong>no slots available</strong> 
                             {% else %}
                                 <form action="/addPerson/{{questcard.id}}/{{questcard.questboard.id}}">
-                                    <input type="text" name="person">
                                     <input class="btn btn-outline-primary" type="submit" value="sign-up">
                                 </form>
                             {% endif %}
