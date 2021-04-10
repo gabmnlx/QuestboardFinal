@@ -17,11 +17,11 @@ class Questcard(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField(max_length=200)
     person1 = models.CharField(
-        max_length=20, null=True, default="", blank=True)
+        max_length=20, null=True,  blank=True)
     person2 = models.CharField(
-        max_length=20, null=True, default="", blank=True)
+        max_length=20, null=True,  blank=True)
     person3 = models.CharField(
-        max_length=20, null=True, default="", blank=True)
+        max_length=20, null=True,  blank=True)
     stars = models.IntegerField()
     questboard = models.ForeignKey(
         Questboard, on_delete=models.CASCADE, blank=True, null=True)
@@ -73,7 +73,7 @@ class addPerson3(models.Model):
 class addPersonOne(models.Model):
     SLOTS = (
         ('Slot 1', 'Slot 1'),
-        ('', ''),
+        ('---', '---'),
     )
     name = models.CharField(max_length=70)
     slot = models.CharField(max_length=10, choices=SLOTS)
@@ -82,7 +82,7 @@ class addPersonOne(models.Model):
 class addPersonTwo(models.Model):
     SLOTS = (
         ('Slot 2', 'Slot 2'),
-        ('', ''),
+        ('---', '---'),
     )
     name = models.CharField(max_length=70)
     slot = models.CharField(max_length=10, choices=SLOTS)
@@ -91,7 +91,7 @@ class addPersonTwo(models.Model):
 class addPersonThree(models.Model):
     SLOTS = (
         ('Slot 3', 'Slot 3'),
-        ('', ''),
+        ('---', '---'),
     )
     name = models.CharField(max_length=70)
     slot = models.CharField(max_length=10, choices=SLOTS)
