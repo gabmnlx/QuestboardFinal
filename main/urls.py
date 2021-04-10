@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import main, questboard, addPerson, addQB, addQC, editName, editDescription, editStars
+from main.views import main, questboard, addPerson, addQB, addQC, editName, editDescription, editStars, confirm
 urlpatterns = [
     path('home/', main.as_view(), name='home'),
     path('questboard/<questboard_id>/', questboard.as_view() , name='questboard'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('editName/<questboard_id>', editName, name="editname" ),
     path('editDescription/<questboard_id>', editDescription, name="editDescription" ),
     path('editStars/<questboard_id>', editStars, name="editStars" ),
+    path('confirm', confirm, name='confirm')
 ]
 

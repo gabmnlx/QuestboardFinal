@@ -1,0 +1,18 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<form action="{% url 'confirm' %}" method="post">
+{% csrf_token %}
+<input type="submit" value="yes">
+<input type="hidden" name="a" value="{{a}}">
+<input type="hidden" name="questcard_id" value="{{questcard_id}}">
+<input type="hidden" name="questboard_id" value="{{questboard_id}}">
+<input type="hidden" name="name" value="{{b}}">
+</form>
+
+<form action="{% url 'questboard' questboard_id  %}">
+    <input type="submit" value="no">
+</form>
+{% endblock %}

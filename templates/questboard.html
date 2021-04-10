@@ -23,13 +23,14 @@
                         
                         <tr><td>
                             
-                            {% if questcard.person3 is not None %}
+                            {% if questcard.person3 is not None and questcard.person2 is not None and questcard.person1 is not None %}
                                 <strong>no slots available</strong> 
                             {% else %}
                                 <form action="/addPerson/{{questcard.id}}/{{questcard.questboard.id}}">
                                     <input class="btn btn-outline-primary" type="submit" value="sign-up">
                                 </form>
                             {% endif %}
+
                         </td></tr>
                     </table>
             </div>

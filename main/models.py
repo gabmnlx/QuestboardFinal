@@ -8,7 +8,7 @@ class Questboard(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def stars_int(self):
         return "\u2B50"*self.stars
 
@@ -31,3 +31,67 @@ class Questcard(models.Model):
 
     def stars_int(self):
         return "\u2B50"*self.stars
+
+
+class addPerson(models.Model):
+    SLOTS = (
+        ('Slot 1', 'Slot 1'),
+        ('Slot 2', 'Slot 2'),
+        ('Slot 3', 'Slot 3')
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPerson2(models.Model):
+    SLOTS = (
+        ('Slot 1', 'Slot 1'),
+        ('Slot 3', 'Slot 3')
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPerson1(models.Model):
+    SLOTS = (
+        ('Slot 2', 'Slot 2'),
+        ('Slot 3', 'Slot 3')
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPerson3(models.Model):
+    SLOTS = (
+        ('Slot 1', 'Slot 1'),
+        ('Slot 2', 'Slot 2')
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPersonOne(models.Model):
+    SLOTS = (
+        ('Slot 1', 'Slot 1'),
+        ('', ''),
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPersonTwo(models.Model):
+    SLOTS = (
+        ('Slot 2', 'Slot 2'),
+        ('', ''),
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)
+
+
+class addPersonThree(models.Model):
+    SLOTS = (
+        ('Slot 3', 'Slot 3'),
+        ('', ''),
+    )
+    name = models.CharField(max_length=70)
+    slot = models.CharField(max_length=10, choices=SLOTS)

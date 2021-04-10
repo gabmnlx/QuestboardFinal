@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import *
-from .forms import QuestboardForm, QuestcardForm, QuestcardForm_
+from .forms import *
 
 
 class main(TemplateView):
@@ -26,20 +26,97 @@ class questboard(TemplateView):
         return context
 
 
+# def addPerson(request, questcard_id, questboard_id):
+#     questcard = Questcard.objects.get(id=questcard_id)
+#     context = {}
+#     if questcard.person1 is not None and questcard.person2 is None and questcard.person3 is None:
+#         form = addPerson1Form()
+#     elif questcard.person1 is not None and questcard.person2 is not None and questcard.person3 is None:
+#         form = addPersonThreeForm()
+#     elif questcard.person1 is None and questcard.person2 is None and questcard.person3 is None:
+#         form = addPersonForm()
+
+#     if request.method == 'POST':
+#         print(request.POST['slot'])
+#         a = request.POST['slot']
+#         if a == "Slot 1":
+#             questcard.person1 = request.POST['name']
+#             questcard.save()
+#             return redirect('/questboard/' + str(questboard_id))
+#         elif a == "Slot 2":
+#             questcard.person2 = request.POST['name']
+#             questcard.save()
+#             return redirect('/questboard/' + str(questboard_id))
+#         elif a == "Slot 3":
+#             print("QWEQWEQWEQWEWQE")
+#             questcard.person3 = request.POST['name']
+#             questcard.save()
+#             return redirect('/questboard/' + str(questboard_id))
+#     context['form'] = form
+#     return render(request, 'addPerson.html',context)
+
 def addPerson(request, questcard_id, questboard_id):
     questcard = Questcard.objects.get(id=questcard_id)
-    if questcard.person1 is None:
-        questcard.person1 = request.GET['person']
-        questcard.save()
-        return redirect('/questboard/' + str(questboard_id))
-    elif questcard.person2 is None:
-        questcard.person2 = request.GET['person']
-        questcard.save()
-        return redirect('/questboard/' + str(questboard_id))
-    elif questcard.person3 is None:
-        questcard.person3 = request.GET['person']
-        questcard.save()
-        return redirect('/questboard/' + str(questboard_id))
+    context = {}
+    if questcard.person1 is not None and questcard.person2 is None and questcard.person3 is None:
+        form = addPerson1Form()
+    elif questcard.person1 is not None and questcard.person2 is not None and questcard.person3 is None:
+        form = addPersonThreeForm()
+    elif questcard.person1 is None and questcard.person2 is None and questcard.person3 is None:
+        form = addPersonForm()
+    elif questcard.person1 is  None and questcard.person2 is not None and questcard.person3 is None:
+        form = addPerson2Form()
+    elif questcard.person1 is  None and questcard.person2 is None and questcard.person3 is not None:
+        form = addPerson3Form()
+    elif questcard.person1 is  None and questcard.person2 is not None and questcard.person3 is not None:
+        form = addPersonOneForm()
+    elif questcard.person1 is not None and questcard.person2 is None and questcard.person3 is not None:
+        form = addPersonTwoForm()
+    if request.method == 'POST':
+        print(request.POST['slot'])
+        a = request.POST['slot']
+        print(a)
+        b = request.POST['name']
+        if a == "Slot 1":
+            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
+            return render(request,'confirmation.html', context)
+            # return redirect('/confirm/' + str(questcard_id) +'/' + str(questboard_id))
+        elif a == "Slot 2":
+            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
+            return render(request,'confirmation.html', context)
+            print("QWEQWEQWEQWEWQE")
+            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
+            return render(request,'confirmation.html', context)
+        elif a == "Slot 3":
+            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
+            return render(request,'confirmation.html', context)
+            print("QWEQWEQWEQWEWQE")
+            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
+            return render(request,'confirmation.html', context)
+    context['form'] = form
+    return render(request, 'addPerson.html',context)
+
+
+def confirm(request):
+    if request.method == 'POST':
+        questcard_id = int(request.POST['questcard_id'])
+        questboard_id = int(request.POST['questboard_id'])
+        questcard = Questcard.objects.get(id=questcard_id)
+        a = request.POST['a']
+        if a == "Slot 1":
+            questcard.person1 = request.POST['name']
+            questcard.save()
+            return redirect('/questboard/' + str(questboard_id))
+        elif a == "Slot 2":
+            questcard.person2 = request.POST['name']
+            questcard.save()
+            return redirect('/questboard/' + str(questboard_id))
+        elif a == "Slot 3":
+            print("QWEQWEQWEQWEWQE")
+            questcard.person3 = request.POST['name']
+            questcard.save()
+            return redirect('/questboard/' + str(questboard_id))
+    return redirect('/questboard/' + str(questboard_id))
 
 
 def addQB(request):
