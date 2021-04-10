@@ -15,32 +15,43 @@
             <div class="card card body">
                 <a class="btn btn-primary  btn-sm btn-block" href=""> <strong>{{questcard.name}}</strong></a> 
 
-                    <table class="table" >
-                        <td> <strong>Description:</strong> {{questcard.description}}</td>
+                    <div class="table" >
+                        <td> <strong>Description:</strong> {{questcard.description}}<br></td>
                         {% if questcard.is_for_everyone %}
                             <tr><td><p>This quest is for everyone to do.</p></td></tr>
                         {% else %}
-                            <tr><td>slot 1: <strong>{{questcard.person1}}</strong></td> </tr>
-                            <tr><td>slot 2: <strong> {{questcard.person2}} </strong></td></tr>
-                            <tr><td>slot 3: <strong> {{questcard.person3}} </strong></td></tr>
+                            <tr><td>slot 1: <strong>{{questcard.person1}}</strong><br></td> </tr>
+                            <tr><td>slot 2: <strong> {{questcard.person2}} </strong><br></td></tr>
+                            <tr><td>slot 3: <strong> {{questcard.person3}} </strong><br></td></tr>
                             <tr><td>stars: {{questcard.stars_int}} </td></tr>
                         
                             <tr><td>
                             
                                 {% if questcard.person3 is not None and questcard.person2 is not None and questcard.person1 is not None %}
+                                <tr><td>
                                     <strong>no slots available</strong> 
                                 {% else %}
                                     <form action="/addPerson/{{questcard.id}}/{{questcard.questboard.id}}">
                                         <input class="btn btn-outline-primary" type="submit" value="sign-up">
                                     </form>
+                                </td></tr>
+                                {% endif %}
+                            
+                        
+                                {% if questcard.person3 is None and questcard.person2 is None and questcard.person1 is None %}
+                                <tr>
+                                    <form action="/editQuestcard/{{questcard.id}}/{{questcard.questboard.id}}">
+                                        <input class="btn btn-outline-primary" type="submit" value="Edit">
+                                    </form>
+                                </tr>
                                 {% endif %}
 
-                            </td></tr>
+                            
                         {% endif %}
                         {% if questcard.is_for_everyone %}
                             <tr><td>stars: {{questcard.stars_int}}</td></tr>
                         {% endif %}
-                    </table>
+                    </div>
             </div>
         </div>
         {% endfor %}

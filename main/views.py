@@ -86,9 +86,7 @@ def addPerson(request, questcard_id, questboard_id):
     elif questcard.person1 is not None and questcard.person2 is None and questcard.person3 is not None:
         form = addPersonTwoForm()
     if request.method == 'POST':
-        print(request.POST['slot'])
         a = request.POST['slot']
-        print(a)
         b = request.POST['name']
         if a == "Slot 1":
             context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
