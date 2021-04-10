@@ -9,17 +9,11 @@ class QuestboardForm(forms.ModelForm):
 
 
 class QuestcardForm(forms.ModelForm):
-
+    is_for_everyone = forms.BooleanField(widget=forms.CheckboxInput, required=False, label="Is this quest for everyone?")
     class Meta:
         model = Questcard
-        fields = "name", "description", "stars", "questboard"
+        fields = "name", "description", "stars", "questboard", "is_for_everyone"
 
-
-class QuestcardForm_(forms.ModelForm):
-
-    class Meta:
-        model = Questcard
-        exclude = ("questboard",)
 
 class addPersonForm(forms.ModelForm):
 

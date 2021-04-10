@@ -23,6 +23,7 @@ class Questcard(models.Model):
     person3 = models.CharField(
         max_length=20, null=True,  blank=True)
     stars = models.IntegerField()
+    is_for_everyone = models.BooleanField(default="False")
     questboard = models.ForeignKey(
         Questboard, on_delete=models.CASCADE, blank=True, null=True)
 
