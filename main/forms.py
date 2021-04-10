@@ -12,7 +12,7 @@ class QuestcardForm(forms.ModelForm):
 
     class Meta:
         model = Questcard
-        fields = "__all__"
+        fields = "name", "description", "stars", "questboard"
 
 
 class QuestcardForm_(forms.ModelForm):
