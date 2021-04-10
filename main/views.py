@@ -26,6 +26,19 @@ class questboard(TemplateView):
         return context
 
 
+class studentQuestboard(TemplateView):
+    template_name = 'studentQuestboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['questboard_id']
+        context['questboard'] = Questboard.objects.get(
+            id=pk).questcard_set.all()
+        context['qbid'] = pk
+        context['qb'] = Questboard.objects.get(id=pk)
+        return context
+
+
 # def addPerson(request, questcard_id, questboard_id):
 #     questcard = Questcard.objects.get(id=questcard_id)
 #     context = {}
@@ -106,17 +119,17 @@ def confirm(request):
         if a == "Slot 1":
             questcard.person1 = request.POST['name']
             questcard.save()
-            return redirect('/questboard/' + str(questboard_id))
+            return redirect('/studentQuestboard/' + str(questboard_id))
         elif a == "Slot 2":
             questcard.person2 = request.POST['name']
             questcard.save()
-            return redirect('/questboard/' + str(questboard_id))
+            return redirect('/studentQuestboard/' + str(questboard_id))
         elif a == "Slot 3":
             print("QWEQWEQWEQWEWQE")
             questcard.person3 = request.POST['name']
             questcard.save()
-            return redirect('/questboard/' + str(questboard_id))
-    return redirect('/questboard/' + str(questboard_id))
+            return redirect('/studentQuestboard/' + str(questboard_id))
+    return redirect('/studentQuestboard' + str(questboard_id))
 
 
 def addQB(request):
@@ -126,7 +139,8 @@ def addQB(request):
     if request.method == 'POST':
         if f.is_valid():
             f.save()
-            return redirect('home')
+            latest = Questboard.objects.latest('id')
+            return redirect('questboard/' + str(latest.id))
     context['form'] = form
     return render(request, 'addQB.html', context)
 
