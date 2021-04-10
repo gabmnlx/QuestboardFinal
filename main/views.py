@@ -77,11 +77,11 @@ def addPerson(request, questcard_id, questboard_id):
         form = addPersonThreeForm()
     elif questcard.person1 is None and questcard.person2 is None and questcard.person3 is None:
         form = addPersonForm()
-    elif questcard.person1 is  None and questcard.person2 is not None and questcard.person3 is None:
+    elif questcard.person1 is None and questcard.person2 is not None and questcard.person3 is None:
         form = addPerson2Form()
-    elif questcard.person1 is  None and questcard.person2 is None and questcard.person3 is not None:
+    elif questcard.person1 is None and questcard.person2 is None and questcard.person3 is not None:
         form = addPerson3Form()
-    elif questcard.person1 is  None and questcard.person2 is not None and questcard.person3 is not None:
+    elif questcard.person1 is None and questcard.person2 is not None and questcard.person3 is not None:
         form = addPersonOneForm()
     elif questcard.person1 is not None and questcard.person2 is None and questcard.person3 is not None:
         form = addPersonTwoForm()
@@ -89,23 +89,28 @@ def addPerson(request, questcard_id, questboard_id):
         a = request.POST['slot']
         b = request.POST['name']
         if a == "Slot 1":
-            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
-            return render(request,'confirmation.html', context)
+            context = {'questcard_id': questcard_id,
+                       'questboard_id': questboard_id, 'a': a, 'b': b}
+            return render(request, 'confirmation.html', context)
             # return redirect('/confirm/' + str(questcard_id) +'/' + str(questboard_id))
         elif a == "Slot 2":
-            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
-            return render(request,'confirmation.html', context)
+            context = {'questcard_id': questcard_id,
+                       'questboard_id': questboard_id, 'a': a, 'b': b}
+            return render(request, 'confirmation.html', context)
             print("QWEQWEQWEQWEWQE")
-            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
-            return render(request,'confirmation.html', context)
+            context = {'questcard_id': questcard_id,
+                       'questboard_id': questboard_id, 'a': a, 'b': b}
+            return render(request, 'confirmation.html', context)
         elif a == "Slot 3":
-            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
-            return render(request,'confirmation.html', context)
+            context = {'questcard_id': questcard_id,
+                       'questboard_id': questboard_id, 'a': a, 'b': b}
+            return render(request, 'confirmation.html', context)
             print("QWEQWEQWEQWEWQE")
-            context = {'questcard_id':questcard_id, 'questboard_id':questboard_id, 'a':a,'b':b}
-            return render(request,'confirmation.html', context)
+            context = {'questcard_id': questcard_id,
+                       'questboard_id': questboard_id, 'a': a, 'b': b}
+            return render(request, 'confirmation.html', context)
     context['form'] = form
-    return render(request, 'addPerson.html',context)
+    return render(request, 'addPerson.html', context)
 
 
 def confirm(request):
@@ -146,15 +151,18 @@ def addQB(request):
 def addQC(request, questboard_id):
     context = {}
     data = {'questboard': Questboard.objects.filter(id=questboard_id)}
-    form = QuestcardForm(initial={'questboard':Questboard.objects.get(id=questboard_id)})
+    form = QuestcardForm(
+        initial={'questboard': Questboard.objects.get(id=questboard_id)})
     f = QuestcardForm(request.POST)
     if request.method == 'POST':
         if f.is_valid():
             f.save()
             return redirect('/questboard/' + str(questboard_id))
-    form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(id=questboard_id)
+    form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(
+        id=questboard_id)
     context['form'] = form
     return render(request, 'addQC.html', context)
+
 
 def editName(request, questboard_id):
 
@@ -163,7 +171,7 @@ def editName(request, questboard_id):
         questboard.name = request.POST['name']
         questboard.save()
         return redirect('/questboard/' + str(questboard_id))
-    return render(request, 'edit.html', {'questboard_id':questboard_id}) 
+    return render(request, 'edit.html', {'questboard_id': questboard_id})
 
 
 def editDescription(request, questboard_id):
@@ -173,7 +181,8 @@ def editDescription(request, questboard_id):
         questboard.description = request.POST['name']
         questboard.save()
         return redirect('/questboard/' + str(questboard_id))
-    return render(request, 'editDescription.html', {'questboard_id':questboard_id}) 
+    return render(request, 'editDescription.html', {'questboard_id': questboard_id})
+
 
 def editStars(request, questboard_id):
 
@@ -182,18 +191,21 @@ def editStars(request, questboard_id):
         questboard.stars = int(request.POST['number'])
         questboard.save()
         return redirect('/questboard/' + str(questboard_id))
-    return render(request, 'editStars.html', {'questboard_id':questboard_id}) 
+    return render(request, 'editStars.html', {'questboard_id': questboard_id})
+
 
 def editQC(request, questboard_id, questcard_id):
     questcard = Questcard.objects.get(id=questcard_id)
     context = {}
     data = {'questboard': Questboard.objects.filter(id=questboard_id)}
-    form = QuestcardForm(initial={'questboard':Questboard.objects.get(id=questboard_id)}, instance=questcard)
+    form = QuestcardForm(initial={'questboard': Questboard.objects.get(
+        id=questboard_id)}, instance=questcard)
     f = QuestcardForm(request.POST, instance=questcard)
     if request.method == 'POST':
         if f.is_valid():
             f.save()
             return redirect('/questboard/' + str(questboard_id))
-    form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(id=questboard_id)
+    form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(
+        id=questboard_id)
     context['form'] = form
     return render(request, 'addQC.html', context)
