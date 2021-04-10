@@ -184,3 +184,16 @@ def editStars(request, questboard_id):
         return redirect('/questboard/' + str(questboard_id))
     return render(request, 'editStars.html', {'questboard_id':questboard_id}) 
 
+def editQC(request, questboard_id, questcard_id):
+    questcard = Questcard.objects.get(id=questcard_id)
+    context = {}
+    data = {'questboard': Questboard.objects.filter(id=questboard_id)}
+    form = QuestcardForm(initial={'questboard':Questboard.objects.get(id=questboard_id)}, instance=questcard)
+    f = QuestcardForm(request.POST, instance=questcard)
+    if request.method == 'POST':
+        if f.is_valid():
+            f.save()
+            return redirect('/questboard/' + str(questboard_id))
+    form.fields['questboard'].queryset = form.fields['questboard'].queryset.filter(id=questboard_id)
+    context['form'] = form
+    return render(request, 'addQC.html', context)

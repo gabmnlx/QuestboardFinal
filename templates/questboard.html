@@ -40,7 +40,7 @@
                         
                                 {% if questcard.person3 is None and questcard.person2 is None and questcard.person1 is None %}
                                 <tr>
-                                    <form action="/editQuestcard/{{questcard.id}}/{{questcard.questboard.id}}">
+                                    <form action="/editQC/{{questcard.questboard.id}}/{{questcard.id}}">
                                         <input class="btn btn-outline-primary" type="submit" value="Edit">
                                     </form>
                                 </tr>
