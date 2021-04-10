@@ -1,6 +1,10 @@
 {% extends 'navbar.html' %}
 {% load static %}
 
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block content %}
 <h1>{{qb.name}} Questboard <form action="/editName/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h1>
 <h3>{{qb.description}} <form action="/editDescription/{{qb.id}}" style="display: inline;"> <input type="submit" class="btn btn-sm btn-danger" value="edit" ></form></h3>
